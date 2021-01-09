@@ -1,30 +1,24 @@
 import React from "react";
+import axios from "axios";
 
 class App extends React.Component {
   state = {
-      count: 0
+      isLoading: true,
+      movies: []
   };
-  add = () => {
-    console.log("add");
-    this.setState(current => ({count:current.count + 1})); // current를 사용할 수 있기 때문에,
-  };
-  minus = () => {
-    console.log("minus");
-    this.setState({count:this.state.count - 1}); // 선호하지는 않음
-  };
+  getMovies = async() => {
+    const movies = await axios.get("https://yts.mx/api/v2/list_movies.json");
+    // axios가 끝날때까지 기다렸다가 진행해라! axios는 시간이 좀 필요하기 때문이다.
+  }
   componentDidMount(){
-    console.log("component Rendered");
+    this.getMovies();
   }
-  componentDidUpdate(){
-    console.log("component Update");
-  }
+
   render(){
-    console.log("i am rnedering");
+    const { isLoading } = this.state;
     return( 
     <div>
-      <h1>The number is: {this.state.count}</h1>
-      <button onClick={this.add}>Add</button>
-      <button onClick={this.minus}>Minus</button>
+      {isLoading ? "Loading..." : "We are ready"}
     </div>
     )
   }
