@@ -12,7 +12,14 @@ class App extends React.Component {
     console.log("minus");
     this.setState({count:this.state.count - 1}); // 선호하지는 않음
   };
+  componentDidMount(){
+    console.log("component Rendered");
+  }
+  componentDidUpdate(){
+    console.log("component Update");
+  }
   render(){
+    console.log("i am rnedering");
     return( 
     <div>
       <h1>The number is: {this.state.count}</h1>
